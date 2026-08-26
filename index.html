@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sai Rohith Bharadwaj Ramavarapu | AI & Computer Vision Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --bg-card: #111827;
+      --bg-card-glass: rgba(17, 24, 39, 0.7);
+      --border-glow: rgba(59, 130, 246, 0.25);
+      --primary: #3b82f6;
+      --primary-glow: #60a5fa;
+      --accent: #8b5cf6;
+      --cyan: #06b6d4;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-main: 'Plus Jakarta Sans', sans-serif;
+      --font-code: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-main);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Ambient Background Glow */
+    .ambient-glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      filter: blur(140px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.18;
+    }
+    .glow-1 { top: -100px; left: -100px; background: #3b82f6; }
+    .glow-2 { bottom: 10%; right: -100px; background: #8b5cf6; }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      backdrop-filter: blur(16px);
+      background: rgba(9, 13, 22, 0.85);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .nav-brand {
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #60a5fa, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-glow);
+    }
+
+    .btn-nav {
+      padding: 0.5rem 1.25rem;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      border-radius: 9999px;
+      color: #fff !important;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.35);
+      transition: transform 0.2s, box-shadow 0.2s !important;
+    }
+
+    .btn-nav:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 5rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 9999px;
+      color: var(--primary-glow);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .badge-pill span {
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #10b981;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.6; }
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title .gradient-text {
+      background: linear-gradient(135deg, #60a5fa 0%, #a855f7 50%, #ec4899 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      max-width: 580px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .stat-item h3 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      font-family: var(--font-code);
+    }
+
+    .stat-item p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 0.85rem 1.8rem;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      border-radius: 12px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(124, 58, 237, 0.6);
+    }
+
+    .btn-secondary {
+      padding: 0.85rem 1.8rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-3px);
+    }
+
+    /* Terminal Window Component */
+    .terminal-card {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(59, 130, 246, 0.15);
+    }
+
+    .terminal-header {
+      background: #1e293b;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+
+    .terminal-title {
+      font-family: var(--font-code);
+      font-size: 0.8rem;
+      color: #64748b;
+      margin-left: auto;
+    }
+
+    .terminal-body {
+      padding: 1.5rem;
+      font-family: var(--font-code);
+      font-size: 0.85rem;
+      line-height: 1.7;
+    }
+
+    .code-comment { color: #64748b; }
+    .code-key { color: #f472b6; }
+    .code-string { color: #34d399; }
+    .code-func { color: #60a5fa; }
+    .code-num { color: #fbbf24; }
+
+    /* Section Styling */
+    section {
+      padding: 6rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-tag {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--primary-glow);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    /* Interactive Comparison Showcase */
+    .showcase-card {
+      background: var(--bg-card-glass);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .interactive-slider-box {
+      position: relative;
+      width: 100%;
+      height: 340px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    }
+
+    .slider-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slider-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      overflow: hidden;
+      border-right: 3px solid #60a5fa;
+      transition: width 0.1s ease;
+    }
+
+    .slider-overlay img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      max-width: none;
+    }
+
+    .slider-label {
+      position: absolute;
+      top: 1rem;
+      padding: 0.3rem 0.8rem;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      z-index: 5;
+    }
+    .label-before { left: 1rem; color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+    .label-after { right: 1rem; color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+
+    .slider-range {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0;
+      height: 100%;
+      cursor: ew-resize;
+      z-index: 10;
+    }
+
+    .metric-pill-row {
+      display: flex;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .metric-badge {
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+    }
+
+    .metric-badge .val {
+      font-family: var(--font-code);
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: #60a5fa;
+    }
+
+    .metric-badge .lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* Grid Projects */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(59, 130, 246, 0.3);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .tech-tag {
+      font-family: var(--font-code);
+      font-size: 0.75rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      color: #cbd5e1;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      background: var(--bg-card-glass);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 1.75rem;
+      transition: all 0.3s ease;
+    }
+
+    .skill-card:hover {
+      border-color: rgba(96, 165, 250, 0.3);
+      background: rgba(17, 24, 39, 0.9);
+    }
+
+    .skill-icon {
+      font-size: 1.8rem;
+      color: var(--primary-glow);
+      margin-bottom: 1rem;
+    }
+
+    .skill-card h4 {
+      font-size: 1.15rem;
+      margin-bottom: 0.75rem;
+      color: #fff;
+    }
+
+    .skill-list {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* Timeline Section */
+    .timeline {
+      position: relative;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 2px;
+      background: rgba(255, 255, 255, 0.1);
+      top: 0;
+      bottom: 0;
+      left: 20px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 60px;
+      margin-bottom: 2.5rem;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 11px;
+      top: 5px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #090d16;
+      border: 3px solid #3b82f6;
+      z-index: 2;
+    }
+
+    .timeline-content {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 1.5rem;
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .timeline-role {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .timeline-org {
+      color: var(--primary-glow);
+      font-weight: 600;
+    }
+
+    .timeline-date {
+      font-family: var(--font-code);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Contact Section */
+    .contact-box {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.1));
+      border: 1px solid rgba(96, 165, 250, 0.2);
+      border-radius: 24px;
+      padding: 4rem 2rem;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .contact-box h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .contact-box p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 2rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .showcase-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 2.5rem; }
+      nav .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <a href="#" class="nav-brand">SRB.AI</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Deep Learning Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="mailto:rohithbharadwaj05@gmail.com" class="btn-nav">Get In Touch</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="about">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="badge-pill">
+            <span></span> Actively Seeking Full-Time AI / CV Roles (Dec 2026)
+          </div>
+          <h1 class="hero-title">
+            Engineering Next-Gen <br />
+            <span class="gradient-text">Computer Vision & AI</span>
+          </h1>
+          <p class="hero-desc">
+            Master’s in Computer Science candidate at <strong>University at Buffalo (AI Track • 3.63 GPA)</strong>. Specialized in deep learning restoration, spatial-temporal video architectures, and production MLOps.
+          </p>
+
+          <div class="hero-stats">
+            <div class="stat-item">
+              <h3>30.19<span style="font-size:1.2rem; color:#60a5fa;">dB</span></h3>
+              <p>Peak Model PSNR</p>
+            </div>
+            <div class="stat-item">
+              <h3>3.63</h3>
+              <p>MS CS GPA</p>
+            </div>
+            <div class="stat-item">
+              <h3>12+</h3>
+              <p>Microservices Built</p>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#projects" class="btn-primary">
+              <i class="fa-solid fa-code-branch"></i> Explore AI Projects
+            </a>
+            <a href="https://www.linkedin.com/in/rohith-bharadwaj-ramavarapu-137509234" target="_blank" class="btn-secondary">
+              <i class="fa-brands fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="mailto:rohithbharadwaj05@gmail.com" class="btn-secondary">
+              <i class="fa-solid fa-envelope"></i> Email Me
+            </a>
+          </div>
+        </div>
+
+        <!-- Terminal Widget -->
+        <div class="terminal-card">
+          <div class="terminal-header">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+            <span class="terminal-title">inference_pipeline.py</span>
+          </div>
+          <div class="terminal-body">
+            <p><span class="code-comment"># AI Engineer Profile Definition</span></p>
+            <p><span class="code-key">class</span> <span class="code-func">AIEngineer</span>:</p>
+            <p>&nbsp;&nbsp;name = <span class="code-string">"Sai Rohith Bharadwaj Ramavarapu"</span></p>
+            <p>&nbsp;&nbsp;institution = <span class="code-string">"University at Buffalo, SUNY"</span></p>
+            <p>&nbsp;&nbsp;gpa = <span class="code-num">3.63</span></p>
+            <p>&nbsp;&nbsp;core_stack = [<span class="code-string">"PyTorch"</span>, <span class="code-string">"OpenCV"</span>, <span class="code-string">"U-Net"</span>, <span class="code-string">"NLP"</span>]</p>
+            <br />
+            <p><span class="code-comment"># Execution Benchmark</span></p>
+            <p><span class="code-key">def</span> <span class="code-func">evaluate_shadow_removal</span>():</p>
+            <p>&nbsp;&nbsp;model = <span class="code-func">MaskGuidedUNet</span>(pretrained=<span class="code-key">True</span>)</p>
+            <p>&nbsp;&nbsp;results = model.<span class="code-func">evaluate</span>(triplets=<span class="code-num">1870</span>)</p>
+            <p>&nbsp;&nbsp;<span class="code-key">return</span> {<span class="code-string">"PSNR"</span>: <span class="code-num">30.19</span>, <span class="code-string">"SSIM"</span>: <span class="code-num">0.9514</span>}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Project Interactive Showcase -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">Flagship Research & Capstone</p>
+        <h2 class="section-title">Deep Learning Shadow Removal</h2>
+      </div>
+
+      <div class="showcase-card">
+        <div class="showcase-grid">
+          <div>
+            <span class="badge-pill" style="margin-bottom:0.75rem;">Computer Vision • Image Restoration</span>
+            <h3 style="font-size:1.75rem; margin-bottom:1rem;">Mask-Guided & Residual U-Net Pipeline</h3>
+            <p style="color:var(--text-muted); margin-bottom:1rem;">
+              Engineered an end-to-end deep learning framework benchmarking Mask-Guided U-Net vs. RGB Residual U-Net architectures trained on 1,870+ paired triplets from the ISTD dataset.
+            </p>
+            
+            <div class="metric-pill-row">
+              <div class="metric-badge">
+                <div class="val">30.19 dB</div>
+                <div class="lbl">Restoration PSNR</div>
+              </div>
+              <div class="metric-badge">
+                <div class="val">0.9514</div>
+                <div class="lbl">Structural SSIM</div>
+              </div>
+              <div class="metric-badge">
+                <div class="val">+3.01 dB</div>
+                <div class="lbl">Gain vs Baseline</div>
+              </div>
+            </div>
+
+            <p style="color:#cbd5e1; font-size:0.9rem; margin-bottom:1.5rem;">
+              <i class="fa-solid fa-check-circle" style="color:#10b981;"></i> Deployed with interactive brush-guided mask UI and automated inference modes for fine-grained boundary recovery.
+            </p>
+
+            <div class="tech-stack">
+              <span class="tech-tag">PyTorch</span>
+              <span class="tech-tag">OpenCV</span>
+              <span class="tech-tag">U-Net</span>
+              <span class="tech-tag">Flask</span>
+              <span class="tech-tag">CUDA</span>
+            </div>
+          </div>
+
+          <!-- Interactive Before / After Simulated Slider Component -->
+          <div>
+            <div class="interactive-slider-box" id="sliderContainer">
+              <span class="slider-label label-before">Shadow Input</span>
+              <span class="slider-label label-after">AI Restored</span>
+              <div class="slider-img" style="background: linear-gradient(135deg, #1e293b, #334155); display: flex; align-items: center; justify-content: center;">
+                <div style="text-align: center; padding: 2rem;">
+                  <i class="fa-solid fa-sun" style="font-size: 3rem; color: #fbbf24; margin-bottom: 1rem;"></i>
+                  <h4 style="color: #fff; font-size: 1.25rem;">Shadow-Free Restoration</h4>
+                  <p style="color: #94a3b8; font-size: 0.85rem;">PSNR: 30.19 dB | SSIM: 0.9514</p>
+                </div>
+              </div>
+              <div class="slider-overlay" id="sliderOverlay" style="width: 50%;">
+                <div style="width: 480px; height: 340px; background: linear-gradient(135deg, #090d16, #1e293b); display: flex; align-items: center; justify-content: center; position: relative;">
+                  <div style="text-align: center; padding: 2rem;">
+                    <i class="fa-solid fa-cloud-moon" style="font-size: 3rem; color: #94a3b8; margin-bottom: 1rem;"></i>
+                    <h4 style="color: #f87171; font-size: 1.25rem;">Complex Shadow Image</h4>
+                    <p style="color: #64748b; font-size: 0.85rem;">Baseline Input (20.56 dB)</p>
+                  </div>
+                </div>
+              </div>
+              <input type="range" min="0" max="100" value="50" class="slider-range" id="sliderRange" oninput="updateSlider(this.value)">
+            </div>
+            <p style="text-align: center; font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">
+              <i class="fa-solid fa-arrows-left-right"></i> Drag slider to simulate before/after restoration comparison
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- More Projects Grid -->
+      <div class="project-grid">
+        <div class="project-card">
+          <div>
+            <h3 style="font-size:1.3rem; margin-bottom:0.75rem; color:#fff;">Spatial-Temporal Video Surveillance</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">
+              Real-time anomaly detection pipeline analyzing live video streams. Engineered spatial-temporal descriptors and trained a sequential CNN-LSTM model for low-latency suspicious event detection.
+            </p>
+          </div>
+          <div class="tech-stack">
+            <span class="tech-tag">PyTorch</span>
+            <span class="tech-tag">CNN-LSTM</span>
+            <span class="tech-tag">Optical Flow</span>
+            <span class="tech-tag">OpenCV</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div>
+            <h3 style="font-size:1.3rem; margin-bottom:0.75rem; color:#fff;">NLP Semantic Retrieval QA Engine</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">
+              Built a vector search question-answering system using Hugging Face embeddings to parse multi-page PDFs, achieving an 0.89 F1-score on intent classification.
+            </p>
+          </div>
+          <div class="tech-stack">
+            <span class="tech-tag">Hugging Face</span>
+            <span class="tech-tag">Vector DB</span>
+            <span class="tech-tag">Transformers</span>
+            <span class="tech-tag">Python</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div>
+            <h3 style="font-size:1.3rem; margin-bottom:0.75rem; color:#fff;">Clinical Multi-Model Risk Predictor</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem;">
+              Diagnostic pipeline benchmarking ensemble models (Random Forest, SVM, XGBoost) across multi-variate patient records, attaining a 0.92 ROC-AUC score deployed via FastAPI.
+            </p>
+          </div>
+          <div class="tech-stack">
+            <span class="tech-tag">Scikit-Learn</span>
+            <span class="tech-tag">FastAPI</span>
+            <span class="tech-tag">Docker</span>
+            <span class="tech-tag">XGBoost</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Matrix -->
+  <section id="skills" style="background: rgba(17, 24, 39, 0.4);">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">Technical Competencies</p>
+        <h2 class="section-title">Skills & AI Frameworks</h2>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <i class="fa-solid fa-brain skill-icon"></i>
+          <h4>Deep Learning & AI</h4>
+          <div class="skill-list">
+            PyTorch, TensorFlow, U-Net, CNNs, Transformers, Transfer Learning, Model Optimization, Hugging Face
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <i class="fa-solid fa-eye skill-icon"></i>
+          <h4>Computer Vision & NLP</h4>
+          <div class="skill-list">
+            OpenCV, Image Restoration, Semantic Segmentation, Optical Flow, Vector Embeddings, Semantic Search
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <i class="fa-solid fa-server skill-icon"></i>
+          <h4>MLOps & Deployment</h4>
+          <div class="skill-list">
+            FastAPI, Flask, Docker, CUDA Acceleration, REST APIs, ONNX, Git, Linux/Bash, CI/CD
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <i class="fa-solid fa-code skill-icon"></i>
+          <h4>Languages & Systems</h4>
+          <div class="skill-list">
+            Python, C++, SQL, C#, JavaScript, PostgreSQL, Redis, MongoDB, Distributed Systems
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Professional Experience -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-tag">Career History</p>
+        <h2 class="section-title">Experience & Research</h2>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <div class="timeline-role">Software Engineer (Backend / Analytics)</div>
+                <div class="timeline-org">UST</div>
+              </div>
+              <div class="timeline-date">Dec 2024 – Jun 2025</div>
+            </div>
+            <p style="color:var(--text-muted); font-size:0.9rem;">
+              Architected 12+ RESTful microservices in .NET Core for a carbon analytics engine. Reduced API response latency by ~30% through SQL query optimization, connection pooling, and asynchronous data access patterns.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <div class="timeline-role">AI / NLP Engineer Trainee</div>
+                <div class="timeline-org">Tech Mahindra</div>
+              </div>
+              <div class="timeline-date">Jan 2024 – Jul 2024</div>
+            </div>
+            <p style="color:var(--text-muted); font-size:0.9rem;">
+              Engineered an intelligent semantic document retrieval system with Hugging Face sentence embeddings and vector search, improving domain intent classification to an 0.89 F1-score.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <div class="timeline-role">Machine Learning Intern</div>
+                <div class="timeline-org">South Matrix Institute of Technology</div>
+              </div>
+              <div class="timeline-date">May 2023 – Dec 2023</div>
+            </div>
+            <p style="color:var(--text-muted); font-size:0.9rem;">
+              Analyzed 500K+ transactional data records using Python and Pandas to engineer behavioral features, achieving a 15% increase in customer segmentation predictive accuracy.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section>
+    <div class="container">
+      <div class="contact-box">
+        <h2>Let's Build Intelligent Systems Together</h2>
+        <p>Graduating in December 2026. Open to full-time AI Engineer, Computer Vision Engineer, and Machine Learning Engineer positions across the US.</p>
+        <div class="contact-links">
+          <a href="mailto:rohithbharadwaj05@gmail.com" class="btn-primary">
+            <i class="fa-solid fa-envelope"></i> rohithbharadwaj05@gmail.com
+          </a>
+          <a href="https://www.linkedin.com/in/rohith-bharadwaj-ramavarapu-137509234" target="_blank" class="btn-secondary">
+            <i class="fa-brands fa-linkedin"></i> LinkedIn Profile
+          </a>
+          <a href="tel:+17164268935" class="btn-secondary">
+            <i class="fa-solid fa-phone"></i> +1 (716) 426-8935
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2026 Sai Rohith Bharadwaj Ramavarapu • Built for High-Performance AI & Vision Engineering</p>
+    </div>
+  </footer>
+
+  <script>
+    function updateSlider(val) {
+      document.getElementById('sliderOverlay').style.width = val + '%';
+    }
+  </script>
+</body>
+</html>
