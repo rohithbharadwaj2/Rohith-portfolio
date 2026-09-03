@@ -5,7 +5,7 @@ This folder is a self-contained static portfolio. It does not require Node.js or
 ## Deploy
 
 1. Create a public GitHub repository, for example `rohithbharadwaj2.github.io`.
-2. Upload everything inside this folder to the repository root.
+2. Upload every file from the ZIP directly to the repository root. This package intentionally uses a flat structure because GitHub's web uploader placed your files at the root.
 3. Open **Settings > Pages**.
 4. Under **Build and deployment**, select **Deploy from a branch**.
 5. Select the `main` branch and `/ (root)`, then save.
@@ -15,8 +15,8 @@ Your site will appear at `https://rohithbharadwaj2.github.io/` when the reposito
 ## Edit
 
 - All page content, colors, animations, and layout are in `index.html`.
-- Replace images in `assets/` while keeping the same filenames, or update their paths in the HTML.
-- Replace résumé PDFs in `resumes/` while keeping the same filenames.
+- Replace image files in the repository root while keeping the same filenames, or update their paths in the HTML.
+- Replace résumé PDFs in the repository root while keeping the same filenames.
 - Search for the existing text in `index.html` to update dates, metrics, links, phone number, or descriptions.
 
 ## Test locally
