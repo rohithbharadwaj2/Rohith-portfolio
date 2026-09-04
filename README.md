@@ -1,30 +1,33 @@
-# Rohith Bharadwaj Portfolio - GitHub Pages
+# Rohith Bharadwaj — Portfolio
 
-This folder is a self-contained static portfolio. It does not require Node.js or a build command.
+A dependency-free, recruiter-focused portfolio for software engineering, backend, AI/ML, computer vision, and robotics roles.
 
-## Deploy
+## Deploy on GitHub Pages
 
-1. Create a public GitHub repository, for example `rohithbharadwaj2.github.io`.
-2. Upload every file from the ZIP directly to the repository root. This package intentionally uses a flat structure because GitHub's web uploader placed your files at the root.
-3. Open **Settings > Pages**.
-4. Under **Build and deployment**, select **Deploy from a branch**.
-5. Select the `main` branch and `/ (root)`, then save.
+1. Open the `Rohith-portfolio` repository on GitHub.
+2. Upload **all files from this package to the repository root**. Keep every filename unchanged.
+3. Commit the files to the default branch.
+4. Open **Settings → Pages**.
+5. Under **Build and deployment**, select **Deploy from a branch**.
+6. Select the default branch and `/ (root)`, then click **Save**.
+7. After deployment finishes, hard-refresh the live page (`Ctrl+Shift+R` or `Cmd+Shift+R`).
 
-Your site will appear at `https://rohithbharadwaj2.github.io/` when the repository has that exact name. For another repository name, the URL will be `https://rohithbharadwaj2.github.io/repository-name/`.
+## Included
 
-## Edit
+- Responsive one-page portfolio with mobile navigation
+- Canvas network background, cursor lighting, 3D tilt, scroll reveals, progress bar, and animated metrics
+- Accessible reduced-motion mode and touch-device fallbacks
+- Three focused projects only: ShadowFix, Video Anomaly Detection, and Clinical Risk Platform
+- Interactive engineering capability visualization
+- Corrected experience dates and February 2027 availability
+- Education, technical skills, phone, email, LinkedIn, and GitHub
+- Separate SDE and AI/ML one-page résumés
+- Local portrait, images, and video—no external CDN dependencies
 
-- All page content, colors, animations, and layout are in `index.html`.
-- Replace image files in the repository root while keeping the same filenames, or update their paths in the HTML.
-- Replace résumé PDFs in the repository root while keeping the same filenames.
-- Search for the existing text in `index.html` to update dates, metrics, links, phone number, or descriptions.
+## Safe customization
 
-## Test locally
+Edit `index.html` in a text editor. Search for the exact text you want to replace. Do not rename the image, video, or résumé files unless you also update their matching references inside `index.html`.
 
-Open `index.html` directly in a browser. For video compatibility, a simple local web server is preferable:
+## Important accuracy note
 
-```bash
-python -m http.server 8000
-```
-
-Then visit `http://localhost:8000`.
+Only keep metrics you can explain and defend in an interview. The site deliberately avoids claiming “state of the art.”
