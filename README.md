@@ -1,33 +1,61 @@
-# Rohith Bharadwaj — Portfolio
+# Rohith Bharadwaj — Engineering Portfolio
 
-A dependency-free, recruiter-focused portfolio for software engineering, backend, AI/ML, computer vision, and robotics roles.
+**Software Engineering × Machine Learning × Computer Vision**
 
-## Deploy on GitHub Pages
+Portfolio for **Rohith Bharadwaj**, an M.S. Computer Science (Artificial Intelligence) student at the University at Buffalo and Graduate Research Assistant working in Robotics & Vision.
 
-1. Open the `Rohith-portfolio` repository on GitHub.
-2. Upload **all files from this package to the repository root**. Keep every filename unchanged.
-3. Commit the files to the default branch.
-4. Open **Settings → Pages**.
-5. Under **Build and deployment**, select **Deploy from a branch**.
-6. Select the default branch and `/ (root)`, then click **Save**.
-7. After deployment finishes, hard-refresh the live page (`Ctrl+Shift+R` or `Cmd+Shift+R`).
+[Live Portfolio](https://rohithbharadwaj2.github.io/Rohith-portfolio/) · [GitHub](https://github.com/rohithbharadwaj2) · [LinkedIn](https://www.linkedin.com/in/rohith-bharadwaj-ramavarapu-137509234/)
 
-## Included
+## Engineering focus
 
-- Responsive one-page portfolio with mobile navigation
-- Canvas network background, cursor lighting, 3D tilt, scroll reveals, progress bar, and animated metrics
-- Accessible reduced-motion mode and touch-device fallbacks
-- Three focused projects only: ShadowFix, Video Anomaly Detection, and Clinical Risk Platform
-- Interactive engineering capability visualization
-- Corrected experience dates and February 2027 availability
-- Education, technical skills, phone, email, LinkedIn, and GitHub
-- Separate SDE and AI/ML one-page résumés
-- Local portrait, images, and video—no external CDN dependencies
+I build systems at the intersection of intelligent models and production software: computer vision, applied machine learning, backend APIs, microservices, model evaluation, and ML deployment workflows.
 
-## Safe customization
+My current research explores adaptive closed-loop illumination for improving Visual SLAM robustness in extreme low-light environments. Previous engineering work includes C#/ASP.NET Core microservices, semantic document retrieval, image restoration, video anomaly detection, and clinical-risk modeling.
 
-Edit `index.html` in a text editor. Search for the exact text you want to replace. Do not rename the image, video, or résumé files unless you also update their matching references inside `index.html`.
+## Featured work
 
-## Important accuracy note
+### ShadowFix — Real-World Shadow Removal
+**PyTorch · OpenCV · U-Net · Gradio · Computer Vision**
 
-Only keep metrics you can explain and defend in an interview. The site deliberately avoids claiming “state of the art.”
+Compared RGB, residual, and mask-guided U-Net formulations on the ISTD benchmark. The best mask-guided model achieved **30.189 dB PSNR** and **0.9514 SSIM** on 540 test triplets, with region-specific evaluation to measure both shadow correction and preservation of unaffected content.
+
+[Repository](https://github.com/rohithbharadwaj2/ShadowFix)
+
+### Video Surveillance Anomaly Detection
+**Python · Deep Learning · Conv3D · ConvLSTM · Video Understanding**
+
+A spatiotemporal anomaly-detection prototype for surveillance video. The project explores reconstruction-based learning over short frame sequences using convolutional and recurrent video representations.
+
+[Repository](https://github.com/rohithbharadwaj2/video-surveillance)
+
+### Clinical Risk Platform
+**Machine Learning · Python · FastAPI/Serving · Web Application**
+
+Clinical-risk modeling project focused on turning tabular patient features into an interactive prediction workflow. The original GitHub repository contains an early Streamlit heart-disease prototype; the fuller project artifacts are being consolidated into a production-oriented public repository.
+
+[Legacy Prototype](https://github.com/rohithbharadwaj2/heart-disease-prediction-ML)
+
+### Carbon Persona
+**C# · ASP.NET Core · Angular · REST APIs · Microservices · SQL**
+
+Full-stack carbon-emissions platform covering household, transportation, waste, recommendations, authentication, and air-quality workflows. The project demonstrates backend API design, service separation, frontend integration, and data-driven product engineering.
+
+[Repository](https://github.com/rohithbharadwaj2/CapstoneProject_CarbonPersona_group4)
+
+## Portfolio engineering
+
+The live site is intentionally dependency-light and optimized for recruiter review. It includes responsive navigation, motion-aware interactions, canvas visuals, project evidence, experience, education, skills, and separate AI/ML and software-engineering resumes.
+
+## Repository contents
+
+- `index.html` — portfolio application
+- `styles.css` — responsive visual system
+- `script.js` — interactions and motion
+- `rohith-professional.png` — profile visual
+- `shadowfix-demo.mp4` / `shadowfix-demo.png` — project evidence
+- `shadowfix-psnr.png` — benchmark visualization
+- AI/ML and SDE resumes
+
+## Principles
+
+Every metric shown in this portfolio should be traceable to project evidence and defensible in an interview. The portfolio avoids unsupported claims and prioritizes architecture, engineering decisions, evaluation methodology, and measurable outcomes.
